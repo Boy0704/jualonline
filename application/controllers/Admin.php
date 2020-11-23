@@ -96,6 +96,23 @@ class Admin extends CI_Controller
 		$this->template->load('admin/template', 'admin/produk/view_produk', $data);
 	}
 
+	public function jadikan_cover()
+	{
+		if ($_GET) {
+			$this->db->where('id_produk', $this->input->get('id_produk'));
+			$this->db->update('gambar_produk', array('cover'=>'0'));
+
+			$this->db->where('id_produk', $this->input->get('id_produk'));
+			$this->db->where('id_gambar', $this->input->get('id_gambar'));
+			$this->db->update('gambar_produk', array('cover' => '1'));
+
+			$this->db->where('id_produk', $this->input->get('id_produk'));
+            $this->db->update('tb_toko_produk', array('gambar'=>get_data('gambar_produk','id_gambar',$this->input->get('id_gambar'),'gambar')));
+
+			redirect('admin/edit_produk/'.$this->input->get('id_produk'),'refresh');
+		}
+	}
+
 	function tambah_produk()
 	{
 
@@ -160,6 +177,11 @@ class Admin extends CI_Controller
                         'cover' => $retVal = ($i == 0) ? '1' : '0',
                     ));
 
+                    if ($i == 0) {
+                    	$this->db->where('id_produk', $id_produk);
+                    	$this->db->update('tb_toko_produk', array('gambar'=>$filename));
+                    }
+
                   } else {
                     log_data($_FILES);
                     log_r($this->upload->display_errors());
@@ -203,6 +225,11 @@ class Admin extends CI_Controller
 
 			if ($_FILES['files']['name'][0] != '') {
 				$id_produk = $this->input->post('id');
+
+				$this->db->where('id_produk', $id_produk);
+				foreach ($this->db->get('gambar_produk')->result() as $img) {
+					unlink("assets/images/produk/".$img->gambar);
+				}
 				$this->db->where('id_produk', $id_produk);
 				$this->db->delete('gambar_produk');
 				 // Count total files
@@ -241,6 +268,11 @@ class Admin extends CI_Controller
 	                        'gambar' => $filename,
 	                        'cover' => $retVal = ($i == 0) ? '1' : '0',
 	                    ));
+
+	                    if ($i == 0) {
+	                    	$this->db->where('id_produk', $id_produk);
+	                    	$this->db->update('tb_toko_produk', array('gambar'=>$filename));
+	                    }
 
 	                  } else {
 	                    log_data($_FILES);

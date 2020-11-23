@@ -1,5 +1,12 @@
 <?php error_reporting(0);
 
+function get_data($tabel,$primary_key,$id,$select)
+{
+    $CI =& get_instance();
+    $data = $CI->db->query("SELECT $select FROM $tabel where $primary_key='$id' ")->row_array();
+    return $data[$select];
+}
+
 function cek_session()
 {
     $ci = &get_instance();

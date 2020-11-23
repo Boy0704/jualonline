@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/template/adminlte3/plugins/tagsinput.css">
+
 <div class="content-wrapper mt-3">
   <section class="content">
     <div class="container-fluid">
@@ -122,28 +124,34 @@
                   <label class="col-sm-2 col-form-label">Ganti Gambar</label>
                   <div class="col-sm-6">
                     <input type="file" name="files[]" class="form-control" multiple>
-                    <<!-- div class="custom-file">
+                    <!-- <div class="custom-file">
                       <input type="file" class="custom-file-input" id="customFileLangHTML" name="g">
                       <label class="custom-file-label" for="customFileLangHTML" data-browse="Cari">Pilih gambar...</label>
                     </div> -->
                   </div>
                 </div>
 
-                <?php
-                if ($rows['gambar'] != '') { ?>
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Gambar Saat Ini</label>
                     <div class="col-sm-10">
                         
-                      <div class="row">
-                        <div class="col-md-12">
-                          
-                        </div>
-                      </div>
+                     <?php 
+                        $this->db->where('id_produk', $rows['id_produk']);
+                        foreach ($this->db->get('gambar_produk')->result() as $key => $value): ?>
+                          <div class="col-md-2">
+                            <img src="<?php echo base_url() ?>assets/images/produk/<?php echo $value->gambar ?>" style="width: 100px;">
+                            <center>
+                              <?php if ($value->cover == '1'): ?>
+                                <a  class="btn btn-xs btn-success">Cover</a>
+                              <?php else: ?>
+                                <a href="<?php echo base_url() ?>admin/jadikan_cover?id_produk=<?php echo $rows['id_produk'] ?>&id_gambar=<?php echo $value->id_gambar ?>" class="btn btn-xs btn-info">Jadikan Cover</a>
+                              <?php endif ?>
+                            </center>
+                          </div>
+                        <?php endforeach ?>
 
                     </div>
                   </div>
-                <?php } ?>
 
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label"></label>
@@ -162,3 +170,5 @@
     </div>
   </section>
 </div>
+
+<script type="text/javascript" src="<?php echo base_url() ?>assets/template/adminlte3/plugins/tagsinput.js"></script>
