@@ -31,7 +31,7 @@ $iden = $this->db->query("SELECT * FROM tb_web_identitas where id_identitas='1'"
     <link rel="icon" type="image/png" href="<?= base_url('assets/images/favicon/') ?><?= $iden['favicon']; ?>">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i">
     <link rel="stylesheet" href="<?= base_url('assets/template/tema/') ?>vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?= base_url('assets/template/tema/') ?>vendor/owl-carousel/assets/owl.carousel.min.css">
+    <!-- <link rel="stylesheet" href="<?= base_url('assets/template/tema/') ?>vendor/owl-carousel/assets/owl.carousel.min.css"> -->
     <link rel="stylesheet" href="<?= base_url('assets/template/tema/') ?>vendor/photoswipe/photoswipe.css">
     <link rel="stylesheet" href="<?= base_url('assets/template/tema/') ?>vendor/photoswipe/default-skin/default-skin.css">
     <link rel="stylesheet" href="<?= base_url('assets/template/tema/') ?>vendor/select2/css/select2.min.css">
@@ -206,7 +206,7 @@ $iden = $this->db->query("SELECT * FROM tb_web_identitas where id_identitas='1'"
     <?php $this->model_main->kunjungan(); ?>
 
     <script src="<?= base_url('assets/template/tema/') ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="<?= base_url('assets/template/tema/') ?>vendor/owl-carousel/owl.carousel.min.js"></script>
+    <!-- <script src="<?= base_url('assets/template/tema/') ?>vendor/owl-carousel/owl.carousel.min.js"></script> -->
     <script src="<?= base_url('assets/template/tema/') ?>vendor/nouislider/nouislider.min.js"></script>
     <script src="<?= base_url('assets/template/tema/') ?>vendor/photoswipe/photoswipe.min.js"></script>
     <script src="<?= base_url('assets/template/tema/') ?>vendor/photoswipe/photoswipe-ui-default.min.js"></script>

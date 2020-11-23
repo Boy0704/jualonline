@@ -326,3 +326,25 @@ function terbilang($x)
     elseif ($x < 1000000000)
         return Terbilang($x / 1000000) . " Juta" . Terbilang($x % 1000000);
 }
+
+function log_r($string = null, $var_dump = false)
+{
+    if ($var_dump) {
+        var_dump($string);
+    } else {
+        echo "<pre>";
+        print_r($string);
+    }
+    exit;
+}
+
+function log_data($string = null, $var_dump = false)
+{
+    if ($var_dump) {
+        var_dump($string);
+    } else {
+        echo "<pre>";
+        print_r($string);
+    }
+    // exit;
+}

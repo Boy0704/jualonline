@@ -1,3 +1,6 @@
+<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/template/owl/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/template/owl/owl.theme.default.css">
+
 <?php
 if (trim($row['gambar']) == '') {
     $foto_produk = 'no-image.png';
@@ -13,12 +16,51 @@ $produk = $row['nama_produk'];
 
         <div class="product__gallery">
             <div class="product-gallery">
-                <div class="product-gallery__featured"><button class="product-gallery__zoom"><svg width="24px" height="24px">
+                <!-- <div class="product-gallery__featured"><button class="product-gallery__zoom"><svg width="24px" height="24px">
                             <use xlink:href="<?= base_url('assets/template/tema/') ?>images/sprite.svg#zoom-in-24"></use>
                         </svg></button>
-                    <div class="owl-carousel" id="product-image"><a href="<?= base_url() . "assets/images/produk/" . $foto_produk ?>" target="_blank"><img src="<?= base_url() . "assets/images/produk/" . $foto_produk ?>" alt="" class="w-75 mx-auto"> </a>
+                    <?php foreach ($this->db->get_where('gambar_produk', array('id_produk'=>$row['id_produk']))->result() as $rw): ?>
+                    <div class="owl-carousel" id="product-image"><a href="<?= base_url() . "assets/images/produk/" . $rw->gambar ?>" target="_blank"><img src="<?= base_url() . "assets/images/produk/" . $rw->gambar ?>" alt="" class="w-75 mx-auto"> </a>
                     </div>
+
+                    <?php endforeach ?>
+                </div> -->
+
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                  <div class="carousel-inner">
+
+                    <?php foreach ($this->db->get_where('gambar_produk', array('id_produk'=>$row['id_produk']))->result() as $key => $rw): ?>
+                        <!-- <div class="item" > <img src="<?php echo base_url() ?>assets/images/produk/<?php echo $rw->gambar ?>" style="width: 330px;" alt=""></div> -->
+                        <div class="carousel-item <?php echo ($key == 0) ? 'active' : '' ?>">
+                          <img class="d-block w-100" src="<?php echo base_url() ?>assets/images/produk/<?php echo $rw->gambar ?>" alt="First slide">
+                        </div>
+                    <?php endforeach ?>
+
+                   
+                  </div>
+                  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
                 </div>
+
+                <!-- <div data-slider-id="1" class="owl-carousel item-slider">
+                    <?php foreach ($this->db->get_where('gambar_produk', array('id_produk'=>$row['id_produk']))->result() as $rw): ?>
+                        <div class="item" > <img src="<?php echo base_url() ?>assets/images/produk/<?php echo $rw->gambar ?>" style="width: 330px;" alt=""></div>
+                    <?php endforeach ?>
+                    
+                </div>
+                <div data-slider-id="1" class="owl-thumbs">
+                    <?php foreach ($this->db->get_where('gambar_produk', array('id_produk'=>$row['id_produk']))->result() as $rw): ?>
+                        <button class="owl-thumb-item"><img src="<?php echo base_url() ?>assets/images/produk/<?php echo $rw->gambar ?>" alt="lens" style="width: 60px; height: 50px;"></button>
+                    <?php endforeach ?>
+                    
+                    
+                </div> -->
 
             </div>
         </div>
@@ -100,8 +142,33 @@ $produk = $row['nama_produk'];
             </div>
             <form id="product-form" class="product__options">
 
+                <div class="form-group product__options">
+                    <label class="product__option-label">Warna</label>
+                    <select name="warna" class="form-control" required="">
+                        <option value=""> --Pilih Warna--</option>
+                        <?php 
+                        $list_warna = explode(',', $row['warna']);
+                        foreach ($list_warna as $key => $value): ?>
+                            <option value="<?php echo $value ?>"><?php echo $value ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
+
+                <div class="form-group product__options">
+                    <label class="product__option-label" >Ukuran</label>
+                    <select name="ukuran" class="form-control" required="">
+                        <option value=""> --Pilih Ukuran--</option>
+                        <?php 
+                        $list_ukuran = explode(',', $row['ukuran']);
+                        foreach ($list_ukuran as $key => $value): ?>
+                            <option value="<?php echo $value ?>"><?php echo $value ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
+
                 <div class="form-group product__option">
                     <input type="hidden" name="id_produk" value="<?= encrypt_url($row['id_produk']) ?>">
+                    
                     <label class="product__option-label" for="product-quantity">Jumlah</label>
                     <div class="product__actions">
                         <div class="product__actions-item">
@@ -290,3 +357,5 @@ if (!empty($temp_sales)) {
 
 <input type="hidden" id="number-cart" value="<?= $number_cart; ?>">
 <script src="<?= base_url('assets/template/js/product.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/template/owl/owl.carousel.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/template/owl/owl.carousel2.thumbs.min.js"></script>

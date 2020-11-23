@@ -96,6 +96,22 @@
                 </div>
 
                 <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Warna</label>
+                  <div class="col-sm-6">
+                    <p>*) pisahkan dengan koma</p>
+                    <input type='text' class='form-control' name='warna' data-role="tagsinput" value='<?= $rows['warna'] ?>' required>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Ukuran</label>
+                  <div class="col-sm-6">
+                    <p>*) pisahkan dengan koma</p>
+                    <input type='text' class='form-control' name='ukuran' data-role="tagsinput" value='<?= $rows['ukuran'] ?>' required>
+                  </div>
+                </div>
+
+                <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Keterangan</label>
                   <div class="col-sm-10">
                     <textarea id="summernote" rows="5" class='form-control' name='ff' required><?= $rows['keterangan'] ?></textarea>
@@ -105,10 +121,11 @@
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Ganti Gambar</label>
                   <div class="col-sm-6">
-                    <div class="custom-file">
+                    <input type="file" name="files[]" class="form-control" multiple>
+                    <<!-- div class="custom-file">
                       <input type="file" class="custom-file-input" id="customFileLangHTML" name="g">
                       <label class="custom-file-label" for="customFileLangHTML" data-browse="Cari">Pilih gambar...</label>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
 
@@ -116,8 +133,14 @@
                 if ($rows['gambar'] != '') { ?>
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Gambar Saat Ini</label>
-                    <div class="col-sm-6">
-                      <img src="<?= base_url('assets/images/produk/') . $rows['gambar'] ?>" alt="" style="height: 150px">
+                    <div class="col-sm-10">
+                        
+                      <div class="row">
+                        <div class="col-md-12">
+                          
+                        </div>
+                      </div>
+
                     </div>
                   </div>
                 <?php } ?>

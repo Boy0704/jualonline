@@ -100,48 +100,74 @@ class Admin extends CI_Controller
 	{
 
 		if (isset($_POST['submit'])) {
-			$config['upload_path'] = 'assets/images/produk/';
-			$config['allowed_types'] = 'gif|jpg|png|jpeg';
-			$config['max_size'] = '5000'; // kb
-			$config['encrypt_name'] = TRUE;
-			$this->load->library('upload', $config);
-			$this->upload->do_upload('g');
-			$hasil = $this->upload->data();
-			if ($hasil['file_name'] == '') {
-				$data = array(
-					'id_supplier' => $this->input->post('supplier'),
-					'id_kategori_produk' => $this->input->post('a'),
-					'nama_produk' => $this->input->post('b'),
-					'produk_seo' => $this->db->escape_str(seo_title($this->input->post('b'))),
-					'satuan' => $this->input->post('c'),
-					'harga_beli' => $this->input->post('d'),
-					'harga_konsumen' => $this->input->post('f'),
-					'diskon' => $this->input->post('diskon'),
-					'berat' => $this->input->post('berat'),
-					'stok' => $this->input->post('stok'),
-					'keterangan' => $this->input->post('ff'),
-					'waktu_input' => date('Y-m-d H:i:s'),
+			$data = array(
+				'id_supplier' => $this->input->post('supplier'),
+				'id_kategori_produk' => $this->input->post('a'),
+				'nama_produk' => $this->input->post('b'),
+				'produk_seo' => $this->db->escape_str(seo_title($this->input->post('b'))),
+				'satuan' => $this->input->post('c'),
+				'harga_beli' => $this->input->post('d'),
+				'harga_konsumen' => $this->input->post('f'),
+				'diskon' => $this->input->post('diskon'),
+				'warna' => $this->input->post('warna'),
+				'ukuran' => $this->input->post('ukuran'),
+				'berat' => $this->input->post('berat'),
+				'stok' => $this->input->post('stok'),
+				'keterangan' => $this->input->post('ff'),
+				'waktu_input' => date('Y-m-d H:i:s'),
 
-				);
-			} else {
-				$data = array(
-					'id_supplier' => $this->input->post('supplier'),
-					'id_kategori_produk' => $this->input->post('a'),
-					'nama_produk' => $this->input->post('b'),
-					'produk_seo' => $this->db->escape_str(seo_title($this->input->post('b'))),
-					'satuan' => $this->input->post('c'),
-					'harga_beli' => $this->input->post('d'),
-					'harga_konsumen' => $this->input->post('f'),
-					'diskon' => $this->input->post('diskon'),
-					'berat' => $this->input->post('berat'),
-					'stok' => $this->input->post('stok'),
-					'gambar' => $hasil['file_name'],
-					'keterangan' => $this->input->post('ff'),
-					'waktu_input' => date('Y-m-d H:i:s'),
-
-				);
-			}
+			);
 			$this->model_app->insert('tb_toko_produk', $data);
+
+			$id_produk = $this->db->insert_id();
+
+            $dt = array();
+
+             // Count total files
+            $countfiles = count($_FILES['files']['name']);
+
+            // Looping all files
+            for($i=0;$i<$countfiles;$i++){
+
+                if(!empty($_FILES['files']['name'][$i])){
+
+                  // Define new $_FILES array - $_FILES['file']
+                  $_FILES['file']['name'] = $_FILES['files']['name'][$i];
+                  $_FILES['file']['type'] = $_FILES['files']['type'][$i];
+                  $_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+                  $_FILES['file']['error'] = $_FILES['files']['error'][$i];
+                  $_FILES['file']['size'] = $_FILES['files']['size'][$i];
+
+                  // Set preference
+                  $config1['upload_path'] = 'assets/images/produk/'; 
+                  $config1['allowed_types'] = 'jpg|jpeg|png|gif';
+                  $config1['max_size'] = '20000'; // max_size in kb
+                  $config1['file_name'] = 'produk_'.time();
+
+                  //Load upload library
+                  $this->load->library('upload',$config1); 
+                  $this->upload->initialize($config1);
+
+                  // File upload
+                  if($this->upload->do_upload('file')){
+                    // Get data about the file
+                    $uploadData = $this->upload->data();
+                    $filename = $uploadData['file_name'];
+                    // Initialize array
+                    $this->db->insert('gambar_produk', array(
+                        'id_produk' => $id_produk,
+                        'gambar' => $filename,
+                        'cover' => $retVal = ($i == 0) ? '1' : '0',
+                    ));
+
+                  } else {
+                    log_data($_FILES);
+                    log_r($this->upload->display_errors());
+                  }
+                }
+
+            }
+
 			redirect('admin/produk');
 		} else {
 
@@ -157,51 +183,74 @@ class Admin extends CI_Controller
 
 		$id = $this->uri->segment(3);
 		if (isset($_POST['submit'])) {
-			$config['upload_path'] = 'assets/images/produk/';
-			$config['allowed_types'] = 'gif|jpg|png|jpeg';
-			$config['max_size'] = '5000'; // kb
-			$config['encrypt_name'] = TRUE;
-			$this->load->library('upload', $config);
-			$this->upload->do_upload('g');
-			$hasil = $this->upload->data();
-			if ($hasil['file_name'] == '') {
-				$data = array(
-					'id_supplier' => $this->input->post('supplier'),
-					'id_kategori_produk' => $this->input->post('a'),
-					'nama_produk' => $this->input->post('b'),
-					'produk_seo' => $this->db->escape_str(seo_title($this->input->post('b'))),
-					'satuan' => $this->input->post('c'),
-					'harga_beli' => $this->input->post('d'),
-					'harga_konsumen' => $this->input->post('f'),
-					'diskon' => $this->input->post('diskon'),
-					'berat' => $this->input->post('berat'),
-					'stok' => $this->input->post('stok'),
-					'keterangan' => $this->input->post('ff'),
-				);
-			} else {
-				$data = array(
-					'id_supplier' => $this->input->post('supplier'),
-					'id_kategori_produk' => $this->input->post('a'),
-					'nama_produk' => $this->input->post('b'),
-					'produk_seo' => $this->db->escape_str(seo_title($this->input->post('b'))),
-					'satuan' => $this->input->post('c'),
-					'harga_beli' => $this->input->post('d'),
-					'harga_konsumen' => $this->input->post('f'),
-					'diskon' => $this->input->post('diskon'),
-					'berat' => $this->input->post('berat'),
-					'stok' => $this->input->post('stok'),
-					'gambar' => $hasil['file_name'],
-					'keterangan' => $this->input->post('ff')
-				);
-				$query = $this->db->get_where('tb_toko_produk', array('id_produk' => $this->input->post('id')));
-				$row = $query->row();
-				$foto = $row->gambar;
-				$path = "assets/images/produk/";
-				unlink($path . $foto);
-			}
+			
+			$data = array(
+				'id_supplier' => $this->input->post('supplier'),
+				'id_kategori_produk' => $this->input->post('a'),
+				'nama_produk' => $this->input->post('b'),
+				'produk_seo' => $this->db->escape_str(seo_title($this->input->post('b'))),
+				'satuan' => $this->input->post('c'),
+				'harga_beli' => $this->input->post('d'),
+				'harga_konsumen' => $this->input->post('f'),
+				'diskon' => $this->input->post('diskon'),
+				'berat' => $this->input->post('berat'),
+				'stok' => $this->input->post('stok'),
+				'keterangan' => $this->input->post('ff'),
+			);
 
 			$where = array('id_produk' => $this->input->post('id'));
 			$this->model_app->update('tb_toko_produk', $data, $where);
+
+			if ($_FILES['files']['name'][0] != '') {
+				$id_produk = $this->input->post('id');
+				$this->db->where('id_produk', $id_produk);
+				$this->db->delete('gambar_produk');
+				 // Count total files
+	            $countfiles = count($_FILES['files']['name']);
+
+	            // Looping all files
+	            for($i=0;$i<$countfiles;$i++){
+
+	                if(!empty($_FILES['files']['name'][$i])){
+
+	                  // Define new $_FILES array - $_FILES['file']
+	                  $_FILES['file']['name'] = $_FILES['files']['name'][$i];
+	                  $_FILES['file']['type'] = $_FILES['files']['type'][$i];
+	                  $_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+	                  $_FILES['file']['error'] = $_FILES['files']['error'][$i];
+	                  $_FILES['file']['size'] = $_FILES['files']['size'][$i];
+
+	                  // Set preference
+	                  $config1['upload_path'] = 'assets/images/produk/'; 
+	                  $config1['allowed_types'] = 'jpg|jpeg|png|gif';
+	                  $config1['max_size'] = '20000'; // max_size in kb
+	                  $config1['file_name'] = 'produk_'.time();
+
+	                  //Load upload library
+	                  $this->load->library('upload',$config1); 
+	                  $this->upload->initialize($config1);
+
+	                  // File upload
+	                  if($this->upload->do_upload('file')){
+	                    // Get data about the file
+	                    $uploadData = $this->upload->data();
+	                    $filename = $uploadData['file_name'];
+	                    // Initialize array
+	                    $this->db->insert('gambar_produk', array(
+	                        'id_produk' => $id_produk,
+	                        'gambar' => $filename,
+	                        'cover' => $retVal = ($i == 0) ? '1' : '0',
+	                    ));
+
+	                  } else {
+	                    log_data($_FILES);
+	                    log_r($this->upload->display_errors());
+	                  }
+	                }
+
+	            }
+			}
+
 			redirect('admin/produk');
 		} else {
 

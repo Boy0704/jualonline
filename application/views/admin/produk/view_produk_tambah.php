@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/template/adminlte3/plugins/tagsinput.css">
 <div class="content-wrapper mt-3">
   <section class="content">
     <div class="container-fluid">
@@ -90,6 +91,22 @@
                 </div>
 
                 <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Warna</label>
+                  <div class="col-sm-6">
+                    <p>*) pisahkan dengan koma</p>
+                    <input type='text' class='form-control' name='warna' data-role="tagsinput" required>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Ukuran</label>
+                  <div class="col-sm-6">
+                    <p>*) pisahkan dengan koma</p>
+                    <input type='text' class='form-control' name='ukuran' data-role="tagsinput" required>
+                  </div>
+                </div>
+
+                <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Keterangan</label>
                   <div class="col-sm-10">
                     <textarea rows="5" id="summernote" class='form-control' name='ff' required></textarea>
@@ -99,10 +116,11 @@
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Gambar</label>
                   <div class="col-sm-6">
-                    <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="customFileLangHTML" name="g">
+                    <input type="file" name="files[]" class="form-control" multiple>
+                    <!-- <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="customFileLangHTML" name="files[]" multiple>
                       <label class="custom-file-label" for="customFileLangHTML" data-browse="Cari">Pilih gambar...</label>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
 
@@ -127,3 +145,5 @@
     </div>
   </section>
 </div>
+
+<script type="text/javascript" src="<?php echo base_url() ?>assets/template/adminlte3/plugins/tagsinput.js"></script>
