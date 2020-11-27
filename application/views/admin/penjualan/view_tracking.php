@@ -65,9 +65,9 @@
                     <tr>
                       <td><small>Alamat</small></td>
                       <td>
-                        <?= $rows['alamat']; ?><br>
-                        Kec. <?= $rows['kecamatan']; ?><br>
-                        <?= $rows['nama_kota']; ?><?= $rows['kode_pos']; ?>
+                        <?= $rows['p_alamat']; ?><br>
+                        Kec. <?= $rows['p_kec']; ?><br>
+                        <?= get_data('tb_kota','kota_id',$rows['p_kota'],'nama_kota'); ?> <?= $rows['p_pos']; ?>
                       </td>
                     </tr>
                   </table>
