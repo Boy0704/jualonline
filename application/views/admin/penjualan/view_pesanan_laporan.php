@@ -74,7 +74,16 @@
                         </div>
 
                         <a class='btn btn-info btn-xs' title='Detail data pesanan' href=' <?= base_url('admin/tracking/') . $row['kode_transaksi'] ?>'><i class='fas fa-search'></i></a>
-                        <a class='btn btn-info btn-xs' title='Input Resi' href='<?= base_url('admin/pesanan_dikirim/') . $row['id_penjualan'] ?>'><i class='fas fa-edit'></i></a>
+                        <a class='btn btn-info btn-xs' title='Input Resi' href='<?= base_url('admin/pesanan_dikirim/') . $row['id_penjualan'] ?>'><i class='fas fa-edit'></i>
+                        </a>
+
+                        <?php
+                        $cek_konf = $this->db->get_where('tb_toko_konfirmasi', array('id_penjualan'=>$row['id_penjualan']));
+                         if ($cek_konf->num_rows() > 0): ?>
+                            <a class='btn btn-info btn-xs' title='Bukti Pembayaran' href='<?= base_url('admin/download_file/') . $cek_konf->row()->bukti_transfer ?>' target="_blank"><i class='fas fa-eye'></i>
+                          </a>
+                        <?php endif ?>
+
                       </td>
                     </tr>
                   <?php
