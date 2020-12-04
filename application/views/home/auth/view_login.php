@@ -14,6 +14,16 @@
                     <?= form_error('password', '<small class="text-danger ml-1">', '</small>'); ?>
                 </div>
 
+                <!-- <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-group" id="show_hide_password">
+                      <input class="form-control" type="password">
+                      <div class="input-group-addon">
+                        <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                      </div>
+                    </div>
+                  </div> -->
+
                 <button type="submit" class="btn btn-primary mt-4">Login</button>
                 <a class="btn btn-default mt-4 float-right" href='<?= base_url('auth/lupa_password') ?>'>Lupa password ?</a><br>
 
@@ -24,3 +34,20 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#show_hide_password a").on('click', function(event) {
+            event.preventDefault();
+            if($('#show_hide_password input').attr("type") == "text"){
+                $('#show_hide_password input').attr('type', 'password');
+                $('#show_hide_password i').addClass( "fa-eye-slash" );
+                $('#show_hide_password i').removeClass( "fa-eye" );
+            }else if($('#show_hide_password input').attr("type") == "password"){
+                $('#show_hide_password input').attr('type', 'text');
+                $('#show_hide_password i').removeClass( "fa-eye-slash" );
+                $('#show_hide_password i').addClass( "fa-eye" );
+            }
+        });
+    });
+</script>

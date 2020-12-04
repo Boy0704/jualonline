@@ -58,7 +58,9 @@ if ($total['proses'] == '0') {
 
         <tr>
           <td><small>Status</small></td>
-          <td><?= $proses ?></td>
+          <td>
+            <b style="color: green"><?= $proses ?></b>
+          </td>
         </tr>
 
         <?php if ($total['proses'] == '3') { ?>

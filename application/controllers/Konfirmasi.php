@@ -26,8 +26,8 @@ class Konfirmasi extends CI_Controller
 			$data['breadcrumb'] = 'Konfirmasi Pembayaran';
 			$this->template->load('home/template', 'home/produk/view_konfirmasi_pembayaran', $data);
 		} else {
-			if (isset($_POST['submit1'])) {
-				$kode_transaksi = filter($this->input->post('a'));
+			if (isset($_GET['kode_transaksi'])) {
+				$kode_transaksi = $_GET['kode_transaksi'];
 				$cek = $this->model_app->view_where('tb_toko_penjualan', array('kode_transaksi' => $kode_transaksi));
 				if ($cek->num_rows() >= 1) {
 

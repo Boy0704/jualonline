@@ -44,6 +44,14 @@
                   } elseif ($row['proses'] == '3') {
                     $proses = '<i class="text-success">Dikirim </i>';
                   }
+
+                  $cek_konf = $this->db->get_where('tb_toko_konfirmasi', array('id_penjualan'=>$row['id_penjualan']));
+                  if ($cek_konf->num_rows()==0) {
+                   $konfir =  "<a class='btn btn-success btn-xs' title='Konfirmasi' href='" . base_url() . "konfirmasi?kode_transaksi=$row[kode_transaksi]' target='_BLANK'>Konfirmasi</a> ";
+                  } else {
+                    $konfir = "";
+                  }
+
                   $total = $this->db->query("SELECT a.kode_transaksi, a.kurir, a.service, a.proses, a.ongkir, sum((b.harga_jual*b.jumlah)-(c.diskon*b.jumlah)) as total, sum(c.berat*b.jumlah) as total_berat FROM `tb_toko_penjualan` a JOIN tb_toko_penjualandetail b ON a.id_penjualan=b.id_penjualan JOIN tb_toko_produk c ON b.id_produk=c.id_produk where a.kode_transaksi='$row[kode_transaksi]'")->row_array();
                   echo "<tr><td>$no</td>
                               <td><a href='" . base_url() . "konfirmasi/tracking/$row[kode_transaksi]'>$row[kode_transaksi]</a></td>
@@ -52,8 +60,10 @@
                               <td>" . cek_terakhir($row['waktu_transaksi']) . " lalu</td>
                               <td>
                                 <a class='btn btn-primary btn-xs' title='Download' href='" . base_url() . "page/download/$row[kode_transaksi]' target='_BLANK'>Download</a>
-                                <a class='btn btn-info btn-xs' title='Rincian data pesanan' href='" . base_url() . "page/tracking_status/$row[kode_transaksi]' target='_BLANK'>Rincian</a>
+                                <a class='btn btn-info btn-xs' title='Rincian data pesanan' href='" . base_url() . "page/tracking_status/$row[kode_transaksi]' target='_BLANK'>Rincian</a>  
+                                $konfir
                               </td>
+
                           </tr>";
                   $no++;
                 }

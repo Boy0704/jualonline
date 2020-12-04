@@ -64,7 +64,7 @@
                         <div class='btn-group'>
                           <button style='width:100px' type='button' class='btn btn-<?= $color ?> btn-xs'><?= $text ?></button>
 
-                          <button type='button' class='btn btn-<?= $color ?> btn-xs dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> <span class='caret'></span> <span class='sr-only'>Toggle Dropdown</span> </button>
+                          <!-- <button type='button' class='btn btn-<?= $color ?> btn-xs dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> <span class='caret'></span> <span class='sr-only'>Toggle Dropdown</span> </button> -->
                           <div class='dropdown-menu' style='border:1px solid #cecece;'>
                             <a class='dropdown-item' href='<?= base_url('admin/pesanan_status/') . $row['id_penjualan'] ?>/0' onclick="return confirm('Apa anda yakin untuk ubah status jadi Pending ?')"> Pending</a>
                             <a class='dropdown-item' href='<?= base_url('admin/pesanan_status/') . $row['id_penjualan'] ?>/1' onclick="return confirm('Apa anda yakin untuk ubah status jadi Konfirmasi ?')"> Konfirmasi</a>

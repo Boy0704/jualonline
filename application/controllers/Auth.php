@@ -40,7 +40,7 @@ class Auth extends CI_Controller
 						<p>Akun Anda:</p>
 						<p>Email: " . $email . "</p><br>
 						<p>Silakan klik tautan di bawah ini untuk mereset password Anda.</p>
-						<a href='" . base_url() . "auth/p?q=" . $kode . "'>Reset Password</a>
+						<a href='" . base_url() . "auth/ganti_password?q=" . $kode . "'>Reset Password</a>
 					";
 
 				kirim_email($email, $subject, $message);

@@ -541,6 +541,14 @@ class Admin extends CI_Controller
 		$data = array('proses' => $this->uri->segment(4));
 		$where = array('id_penjualan' => $this->uri->segment(3));
 		$this->model_app->update('tb_toko_penjualan', $data, $where);
+
+		$this->db->where('id_penjualan', $this->uri->segment(3));
+		$cek_barang = $this->db->get('tb_toko_penjualandetail');
+		foreach ($cek_barang->result() as $rw) {
+			$sql = "UPDATE tb_toko_produk SET stok=stok-'$rw->jumlah' WHERE id_produk='$rw->id_produk' ";
+			$this->db->query($sql);
+		}
+
 		$data['title'] = 'Input Resi';
 		$query = $this->model_app->edit('tb_toko_penjualan', array('id_penjualan' => $this->uri->segment(3)))->row_array();
 		$data = array('rows' => $query);
