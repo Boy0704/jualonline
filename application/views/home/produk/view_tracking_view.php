@@ -29,9 +29,9 @@ if ($total['proses'] == '0') {
         <tr>
           <td><small>Alamat</small></td>
           <td>
-            <?= $rows['alamat'] ?><br>
-            Kecamatan <?= $rows['kecamatan']; ?> <br>
-            <?= $rows['nama_kota']; ?>, <?= $rows['kode_pos']; ?>
+            <?= $rows['p_alamat'] ?><br>
+            Kecamatan <?= $rows['p_kec']; ?> <br>
+            <?= $rows['p_kota']; ?>, <?= $rows['p_pos']; ?>
           </td>
         </tr>
       </table>
