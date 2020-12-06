@@ -45,9 +45,9 @@
     </div>
 
     <hr>
-    <p class="mt-2 mb-2">
-      Setelah melakukan Pembayaran, silahkan konfirmasi pembayaran anda <a href='<?= base_url(); ?>konfirmasi'><strong>disini</strong></a>.
-    </p>
+    <!-- <p class="mt-2 mb-2">
+      Setelah melakukan Pembayaran, silahkan konfirmasi pembayaran anda <a href='<?= base_url(); ?>konfirmasi='><strong>disini</strong></a>.
+    </p> -->
   </div>
 </div>
 <div class="border-top mt-2 mb-5"></div>

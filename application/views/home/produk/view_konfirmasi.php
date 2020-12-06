@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-6 mx-auto">
     <?= $this->session->flashdata('message') ?>
-    <h5>Konfirmasi Pemesanan</h5>
+    <!-- <h5>Konfirmasi Pemesanan</h5>
     <p>Masukan no. invoice pada pada form dibawah ini.</p>
     <form method="POST" action="<?= base_url('konfirmasi') ?>">
       <div class="input-group mb-3">
@@ -10,7 +10,7 @@
           <button class="btn btn-primary" name="submit1" type="submit">Cek invoice</button>
         </div>
       </div>
-    </form>
+    </form> -->
 
   </div>
 </div>
