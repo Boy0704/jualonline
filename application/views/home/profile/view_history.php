@@ -16,7 +16,7 @@
       <div class="col-12 col-lg-9 mt-4 mt-lg-0">
         <div class="card">
           <div class="card-header">
-            <h5>Riwayat Belanja</h5>
+            <h5>Riwayat Transaksi</h5>
           </div>
           <div class="card-divider"></div>
           <div class="card-body">
