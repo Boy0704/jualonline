@@ -31,7 +31,7 @@ if ($total['proses'] == '0') {
           <td>
             <?= $rows['p_alamat'] ?><br>
             Kecamatan <?= $rows['p_kec']; ?> <br>
-            <?= $rows['p_kota']; ?>, <?= $rows['p_pos']; ?>
+            <?= get_data('tb_kota','kota_id',$rows['p_kota'],'nama_kota'); ?>, <?= $rows['p_pos']; ?>
           </td>
         </tr>
       </table>
