@@ -18,7 +18,7 @@
                                         <?= $row['judul']; ?>
                                     </div>
                                     <div class="block-slideshow__slide-text text-justify" style="width: 450px">
-                                        <?= $row['ket']; ?>
+                                        <?= substr($row['ket'], 0, 200); ?>
                                     </div>
                                     <div class="block-slideshow__slide-button">
                                         <span class="btn btn-primary btn-lg">
