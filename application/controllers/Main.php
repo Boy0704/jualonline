@@ -13,6 +13,9 @@ class Main extends CI_Controller
 
 	function index()
 	{
+		if ($this->session->userdata('level') == 1) {
+			redirect('admin','refresh');
+		}
 		$jumlah = $this->model_app->view('tb_toko_produk')->num_rows();
 		$config['base_url'] = base_url() . 'produk/index';
 		$config['total_rows'] = $jumlah;

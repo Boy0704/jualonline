@@ -92,7 +92,7 @@ class Admin extends CI_Controller
 	function produk()
 	{
 		$data['title'] = 'Produk - Toko Online';
-		$data['record'] = $this->model_app->view_ordering('tb_toko_produk', 'nama_produk', 'ACS');
+		$data['record'] = $this->model_app->view_ordering('tb_toko_produk', 'id_produk', 'DESC');
 		$this->template->load('admin/template', 'admin/produk/view_produk', $data);
 	}
 
