@@ -32,7 +32,7 @@ class Admin extends CI_Controller
 	{
 		if (!empty($this->session->userdata())) {
 
-			$data['title'] = 'Admin - Toko Online';
+			$data['title'] = 'Admin - Vortex Online';
 			$data['grap'] = $this->model_main->grafik_kunjungan();
 
 			$this->template->load('admin/template', 'admin/view_dashboard', $data);
