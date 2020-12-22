@@ -46,7 +46,7 @@ class Main extends CI_Controller
 
 
 			$data['title'] = title();
-			$data['record'] = $this->model_app->view_ordering_limit('tb_toko_produk', 'id_produk', 'DESC', $dari, $config['per_page']);
+			$data['record'] = $this->model_app->view_ordering_limit('tb_toko_produk', 'id_produk', 'ASC', $dari, $config['per_page']);
 			$data['artikel'] = $this->model_artikel->semua_artikel(0, 15);
 			$this->pagination->initialize($config);
 			$this->template->load('home/template', 'home/view_home', $data);
