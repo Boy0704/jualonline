@@ -12,7 +12,7 @@ class Model_rekening extends CI_model
             'nama_bank' => $this->db->escape_str($this->input->post('a')),
             'no_rekening' => $this->db->escape_str($this->input->post('b')),
             'pemilik_rekening' => $this->db->escape_str($this->input->post('c')),
-            'id_pengguna' => $this->session->id_pengguna,
+            // 'id_pengguna' => $this->session->id_pengguna,
         );
         $this->db->insert('tb_toko_rekening', $datadb);
     }
