@@ -21,11 +21,9 @@
                                         <?= substr($row['ket'], 0, 200); ?>
                                     </div>
                                     <div class="block-slideshow__slide-button">
-                                        <a href="<?php echo base_url($row['link']) ?>">
-                                            <span class="btn btn-primary btn-lg">
+                                        <span class="btn btn-primary btn-lg">
                                             Selengkapnya
                                         </span>
-                                        </a>
                                     </div>
                                 </div>
                             </a>
